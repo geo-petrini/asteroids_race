@@ -34,7 +34,11 @@ def start_game():
 
     # Game window dimensions
     screen_width = 800
-    screen_height = 1200
+    screen_height = 1000
+    display_info = pygame.display.Info()
+    
+    screen_width = display_info.current_w if display_info.current_w < screen_width else screen_width
+    screen_height = display_info.current_h if display_info.current_h < screen_height else screen_height
 
     # Create the game window
     screen = pygame.display.set_mode((screen_width, screen_height))
@@ -209,10 +213,10 @@ def update_ship(ship):
 
 def update_asteroids(asteroids, score):
     max_factor = 45
-    difficulty = math.pow(score, 1/30)
+    difficulty = math.pow(score, 1/20)
     screen_width, screen_height = pygame.display.get_surface().get_size()
 
-    if random.randint(0, max_factor) == 1:   #TODO alter based on score
+    if random.randint(0, max_factor) < 2*difficulty:
         asteroid = init_sprite_object(
             random.choice(ASTEROID_SPRITES),
             x='RANDOM',
