@@ -4,8 +4,7 @@
 
 
 # TODO
-- collisions
-- fix WARING position (currently it goes offscreen)
+- collisions    http://www.codingwithruss.com/pygame/how-to-use-pygame-masks-for-pixel-perfect-collision/
 - respawn ship
 - add ship animation and effects
 - save highscore
@@ -18,3 +17,4 @@
 - additional controls (touch, mouse, joystick, controller)
 - resize screen and/or scale game depending on client screen height
 - better ships
+- add border options to TextRenderer
