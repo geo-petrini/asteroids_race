@@ -75,7 +75,6 @@ def start_game():
 
     # Asteroids
     asteroids = []
-    asteroids_group = pygame.sprite.Group()
 
     # Stars
     stars = []
@@ -114,7 +113,7 @@ def start_game():
         if not paused:
             difficulty = update_difficulty(score)
             update_ship(player_ship)
-            update_asteroids(asteroids, asteroids_group, difficulty)
+            update_asteroids(asteroids, difficulty)
             update_stars(stars)
 
         # Check collision between player and asteroid
@@ -122,8 +121,12 @@ def start_game():
         # TODO reset score
         # TODO enter new ship with effect
         # else increse score
-        # if pygame.sprite.spritecollide(player_ship, asteroids_group, False, pygame.sprite.collide_mask):
-        #     draw_text('HIT')
+        # for asteroid in asteroids:
+        if pygame.sprite.spritecollide(player_ship, asteroids, False, pygame.sprite.collide_mask):
+            score = 0
+            player_ship_sprite = random.choice(SHIP_SPRITES)
+            player_ship.sprite = player_ship_sprite 
+            player_ship.setPosition( ('CENTER', 'BOTTOM'))
 
         if score > highscore:
             highscore = score
@@ -201,7 +204,7 @@ def update_ship(ship):
         ship.y += 5
 
 
-def update_asteroids(asteroids, asteroids_group, difficulty):
+def update_asteroids(asteroids, difficulty):
     max_factor = 45
     screen_width, screen_height = get_window_size()
 
@@ -220,7 +223,6 @@ def update_asteroids(asteroids, asteroids_group, difficulty):
                               scale=random.random()*3)
         asteroid.y_speed = random.randint(7, math.floor(15*difficulty))
         asteroids.append(asteroid)
-        # asteroids_group.add(asteroid.sprite)
 
     for asteroid in asteroids:
         asteroid.y += asteroid.y_speed

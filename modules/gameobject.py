@@ -2,7 +2,7 @@ import pygame
 from modules.positionhelper import calc_textual_position
 from modules.positionhelper import get_window_size
 
-class GameObject:
+class GameObject(pygame.sprite.Sprite):
 
     def __init__(self, sprite, position=(0,0), scale=1, rotation=0):
         self._original_sprite = sprite
@@ -29,11 +29,11 @@ class GameObject:
     
     @property
     def sprite(self):
-        return self._sprite
+        return self.image
     
     @sprite.setter
     def sprite(self, sprite):
-        self._sprite = sprite
+        self.image = sprite
     
     @property
     def original_sprite(self):
